@@ -3,54 +3,51 @@ import React, { useState } from "react";
 const TodoList = () => {
   const [inputValue, setInputValue] = useState("");
   const [tasks, setTasks] = useState([]);
+
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
-  const addTask = () => {
-    if (inputValue !== "") {
+
+  const addTask = (e) => {
+    if (e.key === "Enter" && inputValue !== "") {
       setTasks([...tasks, inputValue]);
       setInputValue("");
-    } else {
-      alert("La tarea no puede estar vacía");
     }
   };
+
   const removeTask = (taskToRemove) => {
     setTasks(tasks.filter((task) => task !== taskToRemove));
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Lista de Tareas</h2>
+    <div className="todo-container">
+      <h2 className="text-center">To-Do List</h2>
 
-      <div className="input-group mb-3">
+      <div className="input-group">
         <input
           type="text"
-          className="form-control"
+          className="todo-input"
           value={inputValue}
           onChange={handleInputChange}
-          placeholder="Agrega una nueva tarea"
+          onKeyDown={addTask}
+          placeholder="Presiona Enter para agregar una nueva tarea"
         />
-        <button className="btn btn-primary" onClick={addTask}>
-          Agregar
-        </button>
       </div>
 
-      <ul className="list-group">
-        {tasks.map((task, index) => (
-          <li
-            key={index}
-            className="list-group-item d-flex justify-content-between align-items-center"
-          >
-            {task}
-            <button
-              className="btn btn-danger btn-sm"
-              onClick={() => removeTask(task)}
-            >
-              Eliminar
-            </button>
-          </li>
-        ))}
-      </ul>
+      {tasks.length === 0 ? (
+        <p className="no-tasks-message">No hay tareas, añadir tareas</p>
+      ) : (
+        <ul className="task-list">
+          {tasks.map((task, index) => (
+            <li key={index} className="task-item">
+              {task}
+              <button className="remove-btn" onClick={() => removeTask(task)}>
+                Eliminar
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
