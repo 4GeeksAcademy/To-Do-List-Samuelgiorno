@@ -9,8 +9,8 @@ const TodoList = () => {
   };
 
   const addTask = (e) => {
-    if (e.key === "Enter" && inputValue !== "") {
-      setTasks([...tasks, inputValue]);
+    if (e.key === "Enter" && inputValue.trim() !== "") {
+      setTasks([...tasks, inputValue.trim()]);
       setInputValue("");
     }
   };
@@ -40,7 +40,7 @@ const TodoList = () => {
         <ul className="task-list">
           {tasks.map((task, index) => (
             <li key={index} className="task-item">
-              {task}
+              <span className="task-text">{task}</span>
               <button className="remove-btn" onClick={() => removeTask(task)}>
                 Eliminar
               </button>

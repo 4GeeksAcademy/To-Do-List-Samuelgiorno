@@ -8,7 +8,7 @@ body {
 
 .todo-container {
   max-width: 600px;
-  margin: 50px auto;
+  margin: auto;
   padding: 20px;
   background-color: #444;
   border-radius: 10px;
@@ -27,6 +27,7 @@ h2 {
 }
 
 .todo-input {
+  width: 100%;
   flex: 1;
   padding: 10px;
   font-size: 16px;
@@ -61,13 +62,20 @@ h2 {
   background-color: #555;
   padding: 10px;
   margin-bottom: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
+  word-break: break-word;
 }
 
 .task-item:hover {
   transform: scale(1.05);
+}
+
+.task-text {
+  flex: 1;
+  margin-right: 10px;
+  overflow-wrap: break-word;
 }
 
 .remove-btn {
